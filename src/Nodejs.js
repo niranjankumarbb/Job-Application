@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 
-
 class Nodejs extends React.Component{
     constructor() {
         super()
@@ -9,6 +8,7 @@ class Nodejs extends React.Component{
             nodejsDevelopers : []
         }
     }
+
     componentDidMount(){
         axios.get('http://dct-application-form.herokuapp.com/users/application-forms')
         .then(response=>{
@@ -16,19 +16,16 @@ class Nodejs extends React.Component{
             const nodejsDevelopers= response.data.filter(ele=>ele.jobTitle == "Node.js Developer")
             this.setState({nodejsDevelopers})
         })
-
         .catch(err=>{
             console.log(err)
-        })
-       
+        })       
     }
 
     handleDetails = (id) => {
         axios.get(`http://dct-application-form.herokuapp.com/users/application-form/${id}`)
         .then((response) => {
             //console.log(response.data)
-            let object = response.data
-            
+            let object = response.data           
 
         window.alert(`${object.name} Profile
         -------------------------------------------------
@@ -49,7 +46,6 @@ class Nodejs extends React.Component{
         const body = {
             status: 'shortlisted'
         }
-
         axios.put(`http://dct-application-form.herokuapp.com/users/application-form/update/${id}`, body )
         .then((response) => {
             console.log(response.data)           
@@ -63,7 +59,6 @@ class Nodejs extends React.Component{
         const body = {
             status: 'rejected'
         }
-
         axios.put(`http://dct-application-form.herokuapp.com/users/application-form/update/${id}`, body )
         .then((response) => {
             console.log(response.data)           
@@ -86,11 +81,9 @@ class Nodejs extends React.Component{
                     <th> Experience</th>
                     <th> Applied Date</th>
                     <th> View Details</th>
-                    <th> Update Application Status</th>
-  
+                    <th> Update Application Status</th>  
                 </tr>
             </thead>
-
             <tbody>
                 {
                    this.state.nodejsDevelopers.map((ele,i) =>{
@@ -101,34 +94,26 @@ class Nodejs extends React.Component{
                                 <td> {ele.experience}</td>
                                 <td> {ele.createdAt.slice(0,10)}</td>
                                 <td> { <button onClick={()=>{
-                                    this.handleDetails(ele._id)}}> View Details</button>}</td>
+                                    this.handleDetails(ele._id)}} className="btn btn-primary"> View Details</button>}</td>
                                 <td> 
                                     {(ele.status=="applied") && 
                                     <div>
                                     <button onClick= {()=>{
-                                        this.handleShortlisted(ele._id)}}>Shortlist</button>
+                                        this.handleShortlisted(ele._id)}}  className="btn btn-success">Shortlist</button>
                                       <button onClick={()=>{
-                                          this.handleRejected(ele._id)}}>Reject</button>
+                                          this.handleRejected(ele._id)}} className="btn btn-danger">Reject</button>
                                     </div>
                                     }
-                                  {(ele.status== "shortlisted") && <button >Shortlisted</button>}
-
-                                  {(ele.status== "rejected") && <button >Rejected</button>}
-
-
-                                   </td>
-
-
-
+                                  {(ele.status== "shortlisted") && <button   className="btn btn-success">Shortlisted</button>}
+                                  {(ele.status== "rejected") && <button className="btn btn-danger" >Rejected</button>}
+                                </td>
                             </tr>
                        )
                    }) 
                 }
             </tbody>
         </table>
-      </div>
-      
-      
+      </div>    
   )
  }
 }

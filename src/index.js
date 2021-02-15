@@ -4,4 +4,4 @@ import JobApplication from './JobApplication'
 import App from './App'
 
 
-ReactDOM.render(<JobApplication /> , document.getElementById('root'))
+ReactDOM.render(<App/> , document.getElementById('root'))

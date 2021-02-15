@@ -1,6 +1,3 @@
-
-
-
 import React from 'react'
 import axios from 'axios'
 
@@ -14,7 +11,6 @@ class JobApplication extends React.Component{
             jobTitle : '',
             experience : '',
             skills : ''
-
         }
     }
 
@@ -27,64 +23,67 @@ class JobApplication extends React.Component{
     handleSubmit = (e)=>{
      e.preventDefault()
      console.log(this.state)
-
      axios.post('http://dct-application-form.herokuapp.com/users/application-form', this.state)
      .then(response=>{
       console.log(response.data)
      })
-
      .catch((err)=>{
          console.log(err)
      })
-
     }
-
     
     render(){
         return (
-            <div>
+            <div className="row">
+                <div className="col-md-8 offset-md-2">
                 <h1> Apply for job</h1>
                 <form onSubmit = {this.handleSubmit}>
+                    <div className="form-group">
                     <label htmlFor= 'name'>Full name</label>   
-                    <input type ='text' id ='name' name ='name' value = { this.state.name} onChange= {this.handleChange}/>
-                    <br/>
-                    <br/>
-
+                    <input type ='text' id ='name' name ='name' value = { this.state.name} onChange={this.handleChange} className="form-control" />
+                    </div>
+                    <br/> 
+                    <br/> 
+                    <div className="form-group">
                     <label htmlFor= 'email'>Email address</label>   
-                    <input type ='text' id ='email' name='email'value = { this.state.email} onChange= {this.handleChange}/>
+                    <input type ='text' id ='email' name='email'value = { this.state.email} onChange= {this.handleChange} className="form-control"/>
+                    </div>
+                     <br/>
                     <br/>
-                    <br/>
-
+                    <div className="form-group">
+                    </div>
                     <label htmlFor= 'phone'>Contact Number</label>   
-                    <input type ='number' id ='phone' name='phone' value = { this.state.phone} onChange= {this.handleChange}/>
+                    <input type ='number' id ='phone' name='phone' value = { this.state.phone} onChange= {this.handleChange} className="form-control"/>
                     <br/>
                     <br/>
-
+                    <div className="form-group">
                     <label htmlFor= 'jobTitle'>Applying for job</label>   
-                    <select  id ='jobTitle' name = 'jobTitle' value={this.state.jobTitle} onChange={this.handleChange}>
+                    <select  id ='jobTitle' name = 'jobTitle' value={this.state.jobTitle} onChange={this.handleChange} className="form-control">
                         <option value =''>--select--</option>
                         <option  value="Front-End Developer">Front-End Developer </option>
                         <option value="Node.js Developer">Node.js Developer </option>
                         <option value='MEAN Stack Developer'>MEAN Stack Developer </option>
                         <option value='FULL Stack Developer'>FULL Stack Developer </option>
-  
-                        </select>
+                    </select>                     
+                   </div>
+                   <br/>
+                     <br/> 
+                     <div className="form-group">
+                     <label htmlFor= 'experience'>Experience</label>   
+                    <input type ='text' id ='experience' name='experience' value = { this.state.experience} onChange= {this.handleChange} className="form-control"/>
+                     </div>
                      <br/>
-                     <br/>
-
-                    <label htmlFor= 'experience'>Experience</label>   
-                    <input type ='text' id ='experience' name='experience' value = { this.state.experience} onChange= {this.handleChange}/>
                     <br/>
-                    <br/>
-
+                    <div className="form-group">
                     <label htmlFor= 'skills'>Technical Skills</label>   
-                    <input type ='text' id ='skills' name='skills' value = { this.state.skills} onChange= {this.handleChange}/>
+                    <input type ='text' id ='skills' name='skills' value = { this.state.skills} onChange= {this.handleChange} className="form-control"/>
+                   </div>
                     <br/>
                     <br/>
-
-                    <input type ='submit' value='Send Application' />
+                    <input type ='submit' value='Send Application' className="form-control" />
                  </form>
-                </div>
+               </div>
+            </div>  
         )
     }
 }
